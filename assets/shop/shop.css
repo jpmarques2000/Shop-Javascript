@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  background-color: #e9edee;
+}
+
+.main-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to left, #398da9, #10607b, #8dc0d2);
+  display: flex;
+  z-index: 20;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-header__brand {
+  color: #7cbed6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-header__brand img {
+  margin-left: 0.2rem;
+  margin-bottom: 0.2rem;
+  height: 2.5rem;
+  vertical-align: middle;
+}
+
+.main-nav__items {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  margin-right: 0.5rem;
+  padding: 0;
+}
+
+.main-nav__item {
+  margin: 0.5rem;
+}
+
+.main-nav__item a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.2rem 0;
+}
+
+.main-nav__item a:hover,
+.main-nav__item a:active {
+  color: white;
+  border-bottom: 5px solid white;
+}
+
+.main-nav__item--cta a {
+  color: white;
+  background: #ff1b68;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.main-nav__item--cta a:hover,
+.main-nav__item--cta a:active {
+  color: #ff1b68;
+  background: white;
+  border: none;
+}
+
+.product-desc {
+  font-size: 2rem;
+  margin: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.product-section__title {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.product-list { 
+  width: 100%; 
+  max-width: 59rem ;
+  margin: auto; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.product-list img {
+  width: 45%;
+  height: 5rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
+}
+
+.product-list button {
+  background-color: #4548de;
+  color: white;
+  width: 100%;
+  padding: 0.7rem;
+}
+
+.product-list .product__title{
+  font-weight: bold;
+}
+.product-list .product__price{
+  margin: 10px;
+}
+
+.product-list .product-item {
+  width: 28%;
+  margin: 1rem;
+  text-align: center;
+  background-color: #e9edee;
+  box-shadow: 0 3rem 3rem #757676;
+  /* letter-spacing: 1px; */
+}
