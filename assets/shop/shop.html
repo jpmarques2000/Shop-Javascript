@@ -9,6 +9,7 @@
     <script src="shop.js" defer></script>
   </head>
   <body>
+    <div class="backdrop"></div>
     <header class="main-header">
       <a href="index.html" class="main-header__brand">
         <img
@@ -32,12 +33,26 @@
     </header>
     <main>
       <section id="product-list__overview">
-        <h1 class="product-desc">My First Product Shop</h1>
+        <div class="product-shop-info">
+          <div class="shopping">
+            <span class="quantity">0</span>
+            <img src="../images/shopping-bag-icon-462x512-m9zsbpxp.png" />
+          </div>
+        </div>
         <section id="product">
           <h1 class="product-section__title">Choose your Products</h1>
           <div class="product-list"></div>
         </section>
       </section>
+      <div class="cart">
+        <h1>My Cart</h1>
+        <ul class="cartList">
+        </ul>
+        <div class="checkOut">
+            <div class="total">0</div>
+            <div class="closeCart">Close</div>
+        </div>
+    </div>
     </main>
   </body>
 </html>

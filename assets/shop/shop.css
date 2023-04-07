@@ -8,12 +8,17 @@ body {
   background-color: #e9edee;
 }
 
+main {
+  margin-top: 4rem;
+}
+
 .main-header {
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   background: linear-gradient(to left, #398da9, #10607b, #8dc0d2);
+  padding: 0.5rem 1rem;
   display: flex;
   z-index: 20;
   align-items: center;
@@ -72,13 +77,6 @@ body {
   border: none;
 }
 
-.product-desc {
-  font-size: 2rem;
-  margin: 4rem;
-  display: flex;
-  justify-content: center;
-}
-
 .product-section__title {
   font-size: 1.5rem;
   text-align: center;
@@ -96,7 +94,7 @@ body {
 
 .product-list img {
   width: 45%;
-  height: 5rem;
+  height: 7rem;
   margin-top: 0.7rem;
   margin-bottom: 0.3rem;
 }
@@ -110,6 +108,7 @@ body {
 
 .product-list .product__title{
   font-weight: bold;
+  font-size: 1.2rem;
 }
 .product-list .product__price{
   margin: 10px;
@@ -122,4 +121,92 @@ body {
   background-color: #e9edee;
   box-shadow: 0 3rem 3rem #757676;
   /* letter-spacing: 1px; */
+}
+
+.product-shop-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.product-desc {
+  font-size: 2rem;
+}
+
+.shopping {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1.7rem;
+}
+
+.shopping img{
+  width: 40px;
+  cursor: pointer;
+}
+
+.shopping span{
+  background: red;
+  border-radius: 50%;
+  color: #fff;
+  padding: 0.1rem 1rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
+}
+
+.active {
+  display: block !important;
+}
+
+.cart {
+  display: none;
+  width: 35%;
+  height: 94vh;
+  transition: 0.5s;
+  background-color: #398da9;
+  position: fixed;
+  right: 0;
+  top: 3.7rem;
+  z-index: 110;
+}
+
+.cart h1 {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.checkOut {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.checkOut .total {
+  width: 50%;
+  border: 1.5px solid #0e4f1f;
+  background-color: #0e4f1f;
+  height: 5rem;
+  text-align: center;
+}
+
+.checkOut .closeCart {
+  width: 50%;
+  border: 1.5px solid #0e4f1f;
+  background-color: red;
+  height: 5rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.backdrop {
+  position: fixed;
+  display: none;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
 }
