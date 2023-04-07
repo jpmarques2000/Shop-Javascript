@@ -3,6 +3,7 @@ const closeCart = document.querySelector(".closeCart");
 const cart = document.querySelector(".cart");
 const openCart = document.querySelector(".shopping img");
 const backdrop = document.querySelector(".backdrop");
+const cartListItems = document.querySelector(".cartList");
 
 let products = [
   {
@@ -49,18 +50,15 @@ let products = [
 ];
 
 closeCart.addEventListener("click", function () {
-  cart.classList.remove("active");
-  backdrop.classList.remove("active");
+  closeModal();
 });
 
 openCart.addEventListener("click", function () {
-  cart.classList.add("active");
-  backdrop.classList.add("active");
+  openCartModal();
 });
 
 backdrop.addEventListener("click", function () {
-  cart.classList.remove("active");
-  backdrop.classList.remove("active");
+  closeModal();
 });
 
 let cartList = [];
@@ -75,6 +73,65 @@ function shopStart() {
     <div class="product__price">R$ ${product.price}</div>
     <button class="product__button">Add to Cart</button>`;
     productList.append(productDiv);
+
+    const addCartButton = productDiv.querySelector("button");
+    console.log(addCartButton);
   });
 }
+
+function addToCartHandler(id) {
+  if (!cartList) {
+    cartList[id] = products[id];
+    cartList[id].quantity = 1;
+  }
+  updateCart();
+}
+
+function updateProductQuantity(id, prodQuantity) {
+  if (prodQuantity == 0) {
+    delete cartList[id];
+  } else {
+    cartList[id].quantity = prodQuantity;
+    cartList[id].quantity = cartList[id].price * prodQuantity;
+  }
+  updateCart();
+}
+
+function updateCart() {
+  cartListItems.innerHTML = "";
+  let count = 0;
+  let totalPrice = 0;
+  cartList.forEach((prod, id) => {
+    totalPrice = totalPrice + prod.price;
+    count = count + prod.quantity;
+    if (prod) {
+      let cartItemsDiv = document.createElement("li");
+      cartItemsDiv.innerHTML = `
+      <div><img src="${prod.image}"/></div>
+                <div>${prod.name}</div>
+                <div>${prod.price.toLocaleString()}</div>
+                <div>
+                    <button onclick="updateProductQuantity(${id}, ${
+        prod.quantity - 1
+      })">-</button>
+                    <div class="count">${prod.quantity}</div>
+                    <button onclick="updateProductQuantity(${id}, ${
+        prod.quantity + 1
+      })">+</button>
+                </div>
+      `;
+    }
+  });
+}
+
+function closeModal() {
+  cart.classList.remove("active");
+  backdrop.classList.remove("active");
+}
+
+function openCartModal() {
+  cart.classList.add("active");
+  backdrop.classList.add("active");
+}
+
 shopStart();
