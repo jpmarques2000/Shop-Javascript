@@ -1,5 +1,4 @@
 const productList = document.querySelector(".product-list");
-const closeCart = document.querySelector(".closeCart");
 const cart = document.querySelector(".cart");
 const openCart = document.querySelector(".shopping img");
 const backdrop = document.querySelector(".backdrop");
@@ -7,16 +6,20 @@ const cartListItems = document.querySelector(".cartList");
 const totalCart = document.querySelector(".total");
 const navBar = document.querySelectorAll(".main-nav__item");
 const productModal = document.querySelector(".product-modal");
+const newProductInputs = productModal.querySelectorAll("input");
+const confirmAddNewProduct = productModal.querySelector(".btn--sucess");
+const cancelAddNewProduct = productModal.querySelector(".btn--cancel");
+const cartQuantity = document.querySelector(".quantity");
 
 const ADDQTD = "ADD";
 const DECEASEQTD = "REMOVE";
 
 class Product {
-  constructor(name, image, price, id) {
+  constructor(name, image, price) {
     this.name = name;
     this.imageUrl = image;
     this.price = price;
-    this.id = id;
+    this.id = Math.random().toString();
     this.quantity = 0;
   }
 }
@@ -134,75 +137,82 @@ class ShoppingCart extends Component {
         );
       }
     });
-    totalCart.innerText = totalPrice.toLocaleString();
+    totalCart.innerText = `Total: \R$ ${totalPrice.toFixed(2)}`;
+    cartQuantity.innerText = count;
   }
 }
 
 class ProductList extends Component {
-  #products = [];
+  products = [];
 
   constructor(renderHookId) {
     super(renderHookId, false);
     this.render();
     this.fetchProducts();
+
+    // confirmAddNewProduct.addEventListener("click", this.addNewProductHandler);
+  }
+
+  addNewProductHandler() {
+    this.productName = newProductInputs[0].value;
+    this.productPrice = newProductInputs[1].value;
+    this.productImageUrl = newProductInputs[2].value;
+    this.products.push(
+      new Product(this.productName, this.productImageUrl, this.productPrice)
+    );
+    this.renderProducts();
+
+    // this.#products.push();
   }
 
   fetchProducts() {
-    this.#products = [
+    this.products = [
       new Product(
         "A Pillow",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
-        49.99,
-        1
+        49.99
       ),
       new Product(
         "A Carpet",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
-        89.99,
-        2
+        89.99
       ),
       new Product(
         "A Pillow",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
-        49.99,
-        3
+        49.99
       ),
       new Product(
         "A Carpet",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
-        89.99,
-        4
+        89.99
       ),
       new Product(
         "A Pillow",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
-        49.99,
-        5
+        49.99
       ),
       new Product(
         "A Carpet",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
-        89.99,
-        6
+        89.99
       ),
       new Product(
         "A Pillow",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
-        49.99,
-        7
+        49.99
       ),
       new Product(
         "A Carpet",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
-        89.99,
-        8
+        89.99
       ),
     ];
     this.renderProducts();
   }
 
   renderProducts() {
-    for (const prod of this.#products) {
+    for (const prod of this.products) {
       new ProductItem(prod, "prod-list");
     }
   }
@@ -211,7 +221,7 @@ class ProductList extends Component {
     // this.createRootElement("ul", "product-list", [
     //   new ElementAttribute("id", "prod-list"),
     // ]);
-    if (this.#products && this.#products.length > 0) {
+    if (this.products && this.products.length > 0) {
       this.renderProducts();
     }
   }
@@ -243,15 +253,15 @@ class ProductItem extends Component {
   }
 }
 
-closeCart.addEventListener("click", function () {
-  closeModal();
-});
-
 openCart.addEventListener("click", function () {
   openCartModal();
 });
 
 backdrop.addEventListener("click", function () {
+  closeModal();
+});
+
+cancelAddNewProduct.addEventListener("click", function () {
   closeModal();
 });
 

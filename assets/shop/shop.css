@@ -121,7 +121,6 @@ main {
   text-align: center;
   background-color: #e9edee;
   box-shadow: 0 3rem 3rem #757676;
-  /* letter-spacing: 1px; */
 }
 
 .product-shop-info {
@@ -162,13 +161,16 @@ main {
 .cart {
   display: none;
   width: 35%;
-  height: 94vh;
+  /*height: 94vh;*/
+  height: 100%;
   transition: 0.5s;
   background-color: #398da9;
   position: fixed;
   right: 0;
   top: 3.7rem;
   z-index: 110;
+  overflow: scroll;
+  padding-bottom: 2.5rem;
 }
 
 .cart h1 {
@@ -178,28 +180,20 @@ main {
 }
 
 .checkOut {
-  display: flex;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  overflow: scroll;
+    margin: 2rem 2rem;
+    border: 2px solid #0a07d0;
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .checkOut .total {
-  width: 50%;
-  border: 1.5px solid #0e4f1f;
-  background-color: #0e4f1f;
-  height: 5rem;
-  text-align: center;
-}
-
-.checkOut .closeCart {
-  width: 50%;
-  border: 1.5px solid #0e4f1f;
-  background-color: red;
-  height: 5rem;
-  cursor: pointer;
-  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .backdrop {
@@ -212,6 +206,7 @@ main {
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
 }
+
 .cartList li{
   display: flex;
   flex-direction: column;
@@ -253,15 +248,15 @@ main {
   border-color: #f67722;
 }
 
-.btn--passive {
+.btn--cancel {
   color: #00329e;
   background: transparent;
   border: none;
   box-shadow: none;
 }
 
-.btn--passive:hover,
-.btn--passive:active {
+.btn--cancel:hover,
+.btn--cancel:active {
   background: #aec6f8;
 }
 
