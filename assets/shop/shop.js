@@ -150,19 +150,10 @@ class ProductList extends Component {
     this.render();
     this.fetchProducts();
 
-    // confirmAddNewProduct.addEventListener("click", this.addNewProductHandler);
-  }
-
-  addNewProductHandler() {
-    this.productName = newProductInputs[0].value;
-    this.productPrice = newProductInputs[1].value;
-    this.productImageUrl = newProductInputs[2].value;
-    this.products.push(
-      new Product(this.productName, this.productImageUrl, this.productPrice)
+    confirmAddNewProduct.addEventListener(
+      "click",
+      this.addNewProductHandler.bind(this)
     );
-    this.renderProducts();
-
-    // this.#products.push();
   }
 
   fetchProducts() {
@@ -208,6 +199,22 @@ class ProductList extends Component {
         89.99
       ),
     ];
+    this.renderProducts();
+  }
+
+  addNewProductHandler() {
+    this.renderProducts();
+    this.productName = newProductInputs[0].value;
+    this.productPrice = newProductInputs[1].value;
+    this.productImageUrl = newProductInputs[2].value;
+
+    this.newProduct = new Product(
+      this.productName,
+      this.productImageUrl,
+      this.productPrice
+    );
+
+    this.products.push(this.newProduct);
     this.renderProducts();
   }
 
