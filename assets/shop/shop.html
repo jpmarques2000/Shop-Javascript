@@ -10,12 +10,24 @@
   </head>
   <body>
     <div class="backdrop"></div>
+    <div class="product-modal" id="add-modal">
+      <div class="product-modal__content">
+        <h2>New Product</h2>
+        <label for="product-name">Name</label>
+        <input type="text" name="product-name" id="product-name" />
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" />
+        <label for="image-url">Image-URL</label>
+        <input type="text" name="image-url" id="image-url" />
+      </div>
+      <div class="product-modal__actions">
+        <button class="btn btn--passive">Cancel</button>
+        <button class="btn btn--sucess">Add</button>
+      </div>
+    </div>
     <header class="main-header">
       <a href="index.html" class="main-header__brand">
-        <img
-          src="../images/small-shop.svg"
-          alt="My Shop logo"
-        />
+        <img src="../images/small-shop.svg" alt="My Shop logo" />
       </a>
       <nav class="main-nav">
         <ul class="main-nav__items">
@@ -46,13 +58,12 @@
       </section>
       <div class="cart">
         <h1>My Cart</h1>
-        <ul class="cartList">
-        </ul>
+        <ul class="cartList"></ul>
         <div class="checkOut">
-            <div class="total">0</div>
-            <div class="closeCart">Close</div>
+          <div class="total">0</div>
+          <div class="closeCart">Close</div>
         </div>
-    </div>
+      </div>
     </main>
   </body>
 </html>
