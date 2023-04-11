@@ -18,16 +18,10 @@ class Product {
   constructor(name, image, price) {
     this.name = name;
     this.imageUrl = image;
+    this.unitPrice = price;
     this.price = price;
     this.id = Math.random().toString();
     this.quantity = 0;
-  }
-}
-
-class ElementAttribute {
-  constructor(attrName, attrValue) {
-    this.name = attrName;
-    this.value = attrValue;
   }
 }
 
@@ -74,12 +68,13 @@ class ShoppingCart extends Component {
   }
 
   addProduct(product) {
-    const updatedItems = [];
-    // updatedItems.push(product);
-    // this.cartItems = updatedItems;
-    this.cartItems.push(product);
-    this.updateProductQuantity(product.id, "ADD", this.cartItems);
-    // this.render();
+    const exists = this.cartItems.findIndex((x) => x.id === product.id);
+    if (exists >= 0) {
+      this.updateProductQuantity(product.id, "ADD", this.cartItems);
+    } else {
+      this.cartItems.push(product);
+      this.updateProductQuantity(product.id, "ADD", this.cartItems);
+    }
   }
 
   updateProductQuantity(id, type) {
@@ -87,14 +82,14 @@ class ShoppingCart extends Component {
     if (type == ADDQTD) {
       this.cartItems[key].quantity += 1;
       this.cartItems[key].price =
-        this.cartItems[key].quantity * this.cartItems[key].price;
+        this.cartItems[key].quantity * this.cartItems[key].unitPrice;
     } else {
       this.cartItems[key].quantity -= 1;
       if (this.cartItems[key].quantity == 0) {
-        delete this.cartItems[key];
+        this.cartItems.splice(key, 1);
       } else {
         this.cartItems[key].price =
-          this.cartItems[key].quantity * this.cartItems[key].price;
+          this.cartItems[key].quantity * this.cartItems[key].unitPrice;
       }
     }
 
@@ -102,6 +97,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
+    cartListItems.innerHTML = "";
     let count = 0;
     let totalPrice = 0;
     this.cartItems.forEach((cartItem, key) => {
@@ -112,11 +108,11 @@ class ShoppingCart extends Component {
         cartItemsDiv.innerHTML = `
       <div><img src="${cartItem.imageUrl}"/></div>
                 <div class="cartList__itemName">${cartItem.name}</div>
-                <div>R$ ${cartItem.price}</div>
+                <div>R$ ${cartItem.price.toFixed(2)}</div>
                 <div>
-                    <button class="removeQuantityButton">-</button>
+                    <button class="btn removeQuantityButton">-</button>
                     <div class="count">${cartItem.quantity}</div>
-                    <button class="addQuantityButton" >+</button>
+                    <button class="btn addQuantityButton" >+</button>
                 </div>
       `;
         cartListItems.appendChild(cartItemsDiv);
@@ -159,42 +155,42 @@ class ProductList extends Component {
   fetchProducts() {
     this.products = [
       new Product(
-        "A Pillow",
+        "Meat",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
         49.99
       ),
       new Product(
-        "A Carpet",
+        "Meat",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
         89.99
       ),
       new Product(
-        "A Pillow",
+        "Meat",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
         49.99
       ),
       new Product(
-        "A Carpet",
+        "Meat",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
         89.99
       ),
       new Product(
-        "A Pillow",
+        "Meat",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
         49.99
       ),
       new Product(
-        "A Carpet",
+        "Meat",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
         89.99
       ),
       new Product(
-        "A Pillow",
+        "Meat",
         "https://media.wired.com/photos/5b493b6b0ea5ef37fa24f6f6/master/w_2560%2Cc_limit/meat-80049790.jpg",
         49.99
       ),
       new Product(
-        "A Carpet",
+        "Meat",
         "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81W6An71HSL._SL1500_.jpg",
         89.99
       ),
@@ -216,6 +212,8 @@ class ProductList extends Component {
 
     this.products.push(this.newProduct);
     this.renderProducts();
+    closeModal();
+    clearMovieInput();
   }
 
   renderProducts() {
@@ -225,9 +223,6 @@ class ProductList extends Component {
   }
 
   render() {
-    // this.createRootElement("ul", "product-list", [
-    //   new ElementAttribute("id", "prod-list"),
-    // ]);
     if (this.products && this.products.length > 0) {
       this.renderProducts();
     }
@@ -277,10 +272,17 @@ navBar[1].addEventListener("click", function () {
   productModal.classList.add("active");
 });
 
+const clearMovieInput = () => {
+  for (const usrInput of newProductInputs) {
+    usrInput.value = "";
+  }
+};
+
 function closeModal() {
   cart.classList.remove("active");
   backdrop.classList.remove("active");
   productModal.classList.remove("active");
+  clearMovieInput();
 }
 
 function openCartModal() {
